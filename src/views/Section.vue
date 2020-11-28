@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute } from "vue-router";
 import api from '@/service/api'
 export default {
@@ -34,24 +34,19 @@ export default {
     const sectionId = computed(() => route.params.sectId);
     const loading = ref(true);
     const articles = ref(null);
-    //const coverImage = computed(() => `$(route.params.sectId)`);
 
     async function fetchData() {
       loading.value = true;
       await api().get('/posts')
         .then( (res) => {
-          articles.value = res.data.slice(0, sectionId.value*2);
+          articles.value = res.data.slice(0, sectionId.value);
           loading.value = false;
-          console.log(articles.value[0]);
         });
     }
 
-    watchEffect( () => {
-      console.log("New route", articles);
-    })
+    watch(() => sectionId.value, fetchData);
 
     onMounted(() => {
-      console.log('component is mounted!')
       fetchData();
     })
 
