@@ -1,6 +1,6 @@
 <template>
   <section v-if="error" class="article-error">
-    {{ error }}
+    <h2>- 404 -</h2>Oops! Artículo no encontrado
   </section>
   <article v-if="article">
     <div class="article-title">
@@ -24,6 +24,7 @@
     </section>
   </article>
   <article v-else-if="!error">
+    <br>
     <loading/>
   </article>
 </template>
@@ -86,9 +87,11 @@ export default {
 .article-error {
   width: 100%;
   margin: 30px auto;
+  color: #8f979e;
+  font-size: 20px;
+  font-weight: bold;
   padding: 30px;
-  background-color: #62ffff;
-  border: 1px solid #c0c0c0;
+  box-shadow: 0 10px 40px 0 rgba(66, 80, 148, 0.12);
   border-radius: 10px;
 }
 
