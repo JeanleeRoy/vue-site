@@ -2,55 +2,40 @@
   <section class="hero">
     <img src="@/assets/CoverSection/1.jpg" alt="cover">
     <div class="section">
-      <h1>Section name {{sectionId}}</h1>
+      <h1>Section name {{sectId}}</h1>
     </div>
   </section>
   <section class="recent">
     <p class="container" >Publicaiones recientes</p>
   </section>
   <br>
-  <main v-if="loading">
-    Cargando..
-  </main>
-  <main v-if="!loading && articles" class="container">
-    <article v-for="article of articles" :key="article.id">
-      <img src="#" alt="article-img">
-      <section class="text">
-        <h3>{{article.title}}</h3>
-      </section>
-    </article>
-  </main>
+
+  <div v-if="articles.length">
+    <article-list :articles="articles" />
+  </div>
+  <div v-else>
+    <main>Cargando..</main>
+  </div>
   <br><br>
+
 </template>
 
 <script>
-import { computed, onMounted, ref, watch } from 'vue'
-import { useRoute } from "vue-router";
-import api from '@/service/api'
+import ArticleList from '../components/ArticleList.vue';
+import { getArticles } from '@/services/articleService';
+import { watchEffect } from 'vue';
+
 export default {
   name : 'Section',
-  setup() {
-    const route = useRoute();
-    const sectionId = computed(() => route.params.sectId);
-    const loading = ref(true);
-    const articles = ref(null);
+  components: {ArticleList},
+  props: ['sectId'],
+  
+  setup( props ) {
+    const {articles, error, load} = getArticles();
 
-    async function fetchData() {
-      loading.value = true;
-      await api().get('/posts')
-        .then( (res) => {
-          articles.value = res.data.slice(0, sectionId.value);
-          loading.value = false;
-        });
-    }
+    watchEffect(() => load(props.sectId));
 
-    watch(() => sectionId.value, fetchData);
-
-    onMounted(() => {
-      fetchData();
-    })
-
-    return {sectionId, loading, articles}
+    return {articles, error}
   }
 }
 </script>
@@ -88,22 +73,6 @@ h1 {
 .container {
   width: 100%;
 }
-article {
-  display: flex;
-  width: 90%;
-  margin: 10px auto;
-  flex-direction: column;
-  background-color: gray;
-}
-article img {
-  width: 100%;
-  height: 170px;
-  background-color: antiquewhite;
-}
-article .text {
-  width: 100%;
-  padding: 10px;
-}
 
 @media only screen and (min-width: 768px) {
   h1 {
@@ -119,17 +88,6 @@ article .text {
   }
   .recent {
     padding-left: 70px;
-  }
-  main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  article {
-    flex-direction: row;
-  }
-  article img {
-    width: 350px;
   }
 }
 </style>

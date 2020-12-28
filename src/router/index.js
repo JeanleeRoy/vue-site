@@ -13,6 +13,7 @@ const routes = [
     path: "/section/:sectId",
     name: "Section",
     component: Section,
+    props: true
   },
   {
     path: "/article/:id",
