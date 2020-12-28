@@ -1,13 +1,19 @@
 <template>
   <main class="container">
     <article v-for="article of articles" :key="article.id">
-      <img src="#" alt="article-img">
+      <section class="image">
+        <div><img :src="image()" alt="article-img"></div>
+      </section>
       <section class="text">
-        <h3>{{ article.title }}</h3>
-        <p>{{ short(article.body, 120) }}</p>
-        <router-link :to="{ name: 'article', params: {articleId: article.id, title: article.title} }">
-          Ver Articulo
-        </router-link>
+        <div>
+          <h3>{{ article.title }}</h3>
+        <p>{{ short(article.body) }}</p>
+        </div>
+        <div class="article-link">
+          <router-link :to="{ name: 'article', params: {articleId: article.id, title: article.title} }">
+            Ver Articulo
+          </router-link>
+        </div>
       </section>
     </article>
   </main>
@@ -19,11 +25,13 @@ export default {
   props: ['articles'],
 
   setup() {
-    const short = (text, c) => {
-      return text.slice(0, c) + (text.length > c ? "..." : "");
+    const textSize = 180;
+    const short = (text) => {
+      return text.slice(0, textSize) + (text.length > textSize ? "..." : "");
     }
+    const image = () => require(`@/assets/img_bg.jpg`)
 
-    return {short};
+    return { short, image };
   }
 }
 </script>
@@ -32,18 +40,59 @@ export default {
 article {
   display: flex;
   width: 90%;
-  margin: 10px auto;
+  margin: 20px 0px;
   flex-direction: column;
-  background-color: gray;
+  box-shadow: 0 10px 40px 0 rgba(66, 80, 148, 0.12);
+  border-radius: 10px;
 }
-article img {
+article .image {
+  position: relative;
   width: 100%;
-  height: 170px;
-  background-color: antiquewhite;
+  padding-top: 56.25%;
+  overflow: hidden;
+}
+article .image > div{
+  position:  absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+article .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 article .text {
   width: 100%;
-  padding: 10px;
+  height: 100%;
+  padding: 15px;
+  text-align: left;
+}
+article .text h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.article-link {
+  display: flex;
+  justify-content: right;
+}
+.article-link a {
+  display: inline-block;
+  margin: 15px 20px 5px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  background-color: rgb(92, 92, 92);
+  box-shadow: 0 5px 10px 0 rgba(66, 80, 148, 0.12);
+  color: #fff;
+  font-weight: 600;
+  transition: all ease .5s;
+}
+.article-link a:hover {
+  color: #4B5A6A;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 5px 10px 0 rgba(31, 37, 66, 0.2);
 }
 
 @media only screen and (min-width: 768px) {
@@ -53,10 +102,15 @@ article .text {
     justify-content: center;
   }
   article {
-    flex-direction: row;
+    width: 30%;
+    margin: 20px;
+    min-width: 450px;
   }
-  article img {
-    width: 350px;
+  article .text {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: space-between;
   }
 }
 </style>
