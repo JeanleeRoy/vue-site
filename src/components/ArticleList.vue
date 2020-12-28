@@ -2,7 +2,8 @@
   <main class="container">
     <article v-for="article of articles" :key="article.id">
       <section class="image">
-        <div><img :src="image()" alt="article-img"></div>
+        <div><img src="https://example.com/example.jpg" alt="article-img"
+          onerror="this.src='https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg';"></div>
       </section>
       <section class="text">
         <div>

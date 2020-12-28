@@ -1,6 +1,8 @@
 <template>
   <section class="hero">
-    <img :src="sectionImage" alt="cover">
+    <img :src="sectionImage" alt="cover"
+      onerror="this.src='https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg';"
+    >
     <div class="section">
       <h1>Section name {{sectId}}</h1>
     </div>

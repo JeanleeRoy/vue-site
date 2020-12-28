@@ -8,7 +8,9 @@
     </div>
     <img 
       src="@/assets/articles/temporal.webp"
-      class="article-hero-image" :alt="'img_article_'+articleId">
+      class="article-hero-image" :alt="'img_article_'+articleId"
+      onerror="this.src='https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg';"
+    >
     <section class="container">
       <section class="article-info">
         <p><b>Por: </b> Autor-{{article.userId}}</p>
