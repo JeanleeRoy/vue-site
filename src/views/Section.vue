@@ -1,6 +1,6 @@
 <template>
   <section class="hero">
-    <img src="@/assets/CoverSection/1.jpg" alt="cover">
+    <img :src="sectionImage" alt="cover">
     <div class="section">
       <h1>Section name {{sectId}}</h1>
     </div>
@@ -23,7 +23,7 @@
 <script>
 import ArticleList from '../components/ArticleList.vue';
 import { getArticles } from '@/services/articleService';
-import { watchEffect } from 'vue';
+import { computed, watchEffect } from 'vue';
 
 export default {
   name : 'Section',
@@ -32,10 +32,11 @@ export default {
   
   setup( props ) {
     const {articles, error, load} = getArticles();
+    const sectionImage = computed(() => require(`@/assets/coverSection/${props.sectId}.jpg`));
 
     watchEffect(() => load(props.sectId));
 
-    return {articles, error}
+    return {articles, error, sectionImage}
   }
 }
 </script>
