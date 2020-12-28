@@ -15,9 +15,9 @@
         <p><b>Fecha: </b> {{fecha}}</p>
       </section>
       <section class="article-body">
+        <p > {{article.body}} {{article.body}}  </p>
         <p > {{article.body}} </p>
-        <p > {{article.body}} </p>
-        <p > {{article.body}} </p>
+        <p > {{article.body}} {{article.body}} {{article.body}}</p>
       </section>
     </section>
   </article>

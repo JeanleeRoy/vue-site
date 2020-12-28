@@ -2,7 +2,7 @@
   <nav>
     <div class="container">
       <router-link to="/" class="enlace">
-        <img src="@/assets/logo150x50.png">
+        <img src="@/assets/logo_blanco.png">
       </router-link>
       <a class="hamburger" href="#">
         <img class="hamburger-img" src="@/assets/menu.png" alt="menu">
@@ -38,6 +38,10 @@ nav {
   align-items: center;
   margin: auto;
   padding: 0 10px;
+}
+nav img {
+  height: 50px;
+  padding: 8px;
 }
 ul.sections {
   display: none;
