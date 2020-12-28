@@ -3,8 +3,11 @@
     <article v-for="article of articles" :key="article.id">
       <img src="#" alt="article-img">
       <section class="text">
-        <h3>{{article.title}}</h3>
-        <p>{{article.body}}</p>
+        <h3>{{ article.title }}</h3>
+        <p>{{ short(article.body, 120) }}</p>
+        <router-link :to="{ name: 'article', params: {articleId: article.id} }">
+          Ver Articulo
+        </router-link>
       </section>
     </article>
   </main>
@@ -13,7 +16,15 @@
 <script>
 export default {
   name: 'ArticleList',
-  props: ['articles']
+  props: ['articles'],
+
+  setup() {
+    const short = (text, c) => {
+      return text.slice(0, c) + (text.length > c ? "..." : "");
+    }
+
+    return {short};
+  }
 }
 </script>
 

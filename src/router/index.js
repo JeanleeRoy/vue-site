@@ -16,9 +16,10 @@ const routes = [
     props: true
   },
   {
-    path: "/article/:id",
+    path: "/article/:articleId",
     name: "article",
     component: Article,
+    props: true
   }
 ];
 
