@@ -51,7 +51,7 @@ ul.sections {
   align-items: center;
 }
 .hamburger-img {
-  height: 32px;
+  height: 40px;
 }
 .enlace {
   text-decoration: none;
@@ -60,6 +60,10 @@ ul.sections {
   display: inline-flex;
   align-items: center;
 }
+
+ .sections .router-link-exact-active {
+   background-color: rgba(255, 255, 255, .3);
+ }
 
 @media only screen and (min-width: 768px) {
   .hamburger {
@@ -71,8 +75,13 @@ ul.sections {
   }
   li {
     display: inline-block;
-    padding: 10px;
+    height: 100%;
     text-decoration: none;
+  }
+  .sections .enlace {
+    padding: 10px;
+    margin-left: 10px;
+    height: 100%;
   }
 }
 </style>
