@@ -22,15 +22,17 @@
     </section>
   </article>
   <article v-else-if="!error">
-    Cargando..
+    <loading/>
   </article>
 </template>
 
 <script>
 import { getArticle } from '@/services/articleService';
 import { watchEffect } from 'vue';
+import Loading from '../components/Loading.vue';
 
 export default {
+  components: { Loading },
   name : 'Article',
   props: ['articleId'],
 

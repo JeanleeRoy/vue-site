@@ -14,7 +14,7 @@
     <article-list :articles="articles" />
   </div>
   <div v-else>
-    <main>Cargando..</main>
+    <main><loading/></main>
   </div>
   <br><br>
 
@@ -23,11 +23,12 @@
 <script>
 import ArticleList from '../components/ArticleList.vue';
 import { getArticles } from '@/services/articleService';
+import Loading from '../components/Loading.vue'
 import { computed, watchEffect } from 'vue';
 
 export default {
   name : 'Section',
-  components: {ArticleList},
+  components: { ArticleList, Loading },
   props: ['sectId'],
   
   setup( props ) {
