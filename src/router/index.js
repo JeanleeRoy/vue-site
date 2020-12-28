@@ -28,4 +28,12 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  if (to.params.title)
+    document.title = 'Piso11 - ' + to.params.title;
+  else
+    document.title = 'Revista Piso 11';
+  next();
+})
+
 export default router;

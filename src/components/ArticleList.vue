@@ -5,7 +5,7 @@
       <section class="text">
         <h3>{{ article.title }}</h3>
         <p>{{ short(article.body, 120) }}</p>
-        <router-link :to="{ name: 'article', params: {articleId: article.id} }">
+        <router-link :to="{ name: 'article', params: {articleId: article.id, title: article.title} }">
           Ver Articulo
         </router-link>
       </section>
