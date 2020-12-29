@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <main class="article-container">
     <article class="article-body">
       <div class="description">
         {{article.body}} {{article.body}}
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style>
-.container {
+.article-container {
   width: 100%;
   padding: 1em;
   font-family: 'Poppins', sans-serif;
@@ -86,6 +86,19 @@ export default {
   color: #000000;
   border-left: 3px solid #838383;
   font-family: 'Montserrat', sans-serif;
+}
+.article-body blockquote::before {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%);
+  content: "\201c";
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: normal;
+  font-size: 150px;
+  line-height: .41;
+  color: #eaeeff;
 }
 .article-body blockquote span {
   position: absolute;
@@ -138,10 +151,22 @@ export default {
 }
 
 @media only screen and (min-width: 600px) {
-  .container {
-    max-width: 900px;
+  .article-container {
+    max-width: 850px;
     margin: auto;
     color: #464646;
+    line-height: 1.5em;
+  }
+  .article-body > p, 
+  .article-body blockquote,
+  .description {
+    margin-bottom: 1.2em;
+    line-height: 1.35em;
+  }
+  .article-body ul,
+  .article-body ol {
+    padding-left: 1em;
+    margin-bottom: 1.25em;
   }
 }
 </style>

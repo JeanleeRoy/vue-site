@@ -63,6 +63,7 @@ article .image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  margin: auto;
 }
 article .text {
   width: 100%;
