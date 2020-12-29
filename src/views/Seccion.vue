@@ -11,9 +11,8 @@
     <p class="container" >Publicaiones recientes</p>
   </section>
   <br>
-
   <div v-if="articles.length">
-    <article-list :articles="articles" />
+    <article-list :articles="articles"/>
   </div>
   <div v-else>
     <main><loading/></main>
@@ -23,13 +22,14 @@
 </template>
 
 <script>
-import ArticleList from '../components/ArticleList.vue';
+
 import { getArticles } from '@/services/articleService';
-import Loading from '../components/Loading.vue'
+import Loading from '@/components/Loading.vue'
 import { computed, watchEffect } from 'vue';
+import ArticleList from '@/components/article/ArticleList.vue';
 
 export default {
-  name : 'Section',
+  name : 'Seccion',
   components: { ArticleList, Loading },
   props: ['sectId'],
   
@@ -37,7 +37,10 @@ export default {
     const {articles, error, load} = getArticles();
     const sectionImage = computed(() => require(`@/assets/coverSection/${props.sectId}.jpg`));
 
-    watchEffect(() => load(props.sectId));
+    watchEffect(() => {
+      load(props.sectId);
+      document.title = 'Piso11 - Section' + props.sectId;
+    });
 
     return {articles, error, sectionImage}
   }

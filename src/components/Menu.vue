@@ -10,27 +10,27 @@
       <ul class="sections">
         <li><router-link to="/" class="enlace">Home</router-link></li>
         <li><router-link
-          :to="{ name: 'Section', params: {sectId: 1, title: 'Section 1'} }"
+          :to="{ name: 'Seccion', params: {sectId: 1} }"
           class="enlace">
           Section 1
         </router-link></li>
         <li><router-link
-          :to="{ name: 'Section', params: {sectId: 2, title: 'Section 2'} }"
+          :to="{ name: 'Seccion', params: {sectId: 2} }"
           class="enlace">
           Section 2
         </router-link></li>
         <li><router-link
-          :to="{ name: 'Section', params: {sectId: 3, title: 'Section 3'} }"
+          :to="{ name: 'Seccion', params: {sectId: 3} }"
           class="enlace">
           Section 3
         </router-link></li>
         <li><router-link
-          :to="{ name: 'Section', params: {sectId: 4, title: 'Section 4'} }"
+          :to="{ name: 'Seccion', params: {sectId: 4} }"
           class="enlace">
           Section 4
         </router-link></li>
         <li><router-link
-          :to="{ name: 'Section', params: {sectId: 5, title: 'Section 5'} }"
+          :to="{ name: 'Seccion', params: {sectId: 5} }"
           class="enlace">
           Section 5
         </router-link></li>

@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "@/views/Home.vue";
-import Section from "@/views/Section.vue";
-import Article from "@/views/Article.vue";
+import Seccion from "@/views/Seccion.vue";
+import Articulo from "@/views/Articulo.vue";
 
 const routes = [
   {
@@ -11,14 +11,14 @@ const routes = [
   },
   {
     path: "/section/:sectId",
-    name: "Section",
-    component: Section,
+    name: "Seccion",
+    component: Seccion,
     props: true
   },
   {
     path: "/article/:articleId",
-    name: "article",
-    component: Article,
+    name: "articulo",
+    component: Articulo,
     props: true
   }
 ];
@@ -29,9 +29,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.params.title)
-    document.title = 'Piso11 - ' + to.params.title;
-  else
+  if (to.params.title === null)
     document.title = 'Revista Piso 11';
   next();
 })

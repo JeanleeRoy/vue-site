@@ -11,7 +11,7 @@
         <p>{{ short(article.body) }}</p>
         </div>
         <div class="article-link">
-          <router-link :to="{ name: 'article', params: {articleId: article.id, title: article.title} }">
+          <router-link :to="{ name: 'articulo', params: {articleId: article.id} }">
             Ver Articulo
           </router-link>
         </div>
