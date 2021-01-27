@@ -1,7 +1,7 @@
 <template>
   <section class="hero">
-    <img :src="sectionImage" alt="loading"
-      onerror="this.src='https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg';"
+    <img :src="sectionImage" alt="Cargando..."
+      @error="err_img"
     >
     <div class="section">
       <h1>Section name {{sectId}}</h1>
@@ -36,13 +36,15 @@ export default {
   setup( props ) {
     const {articles, error, load} = getArticles();
     const sectionImage = computed(() => require(`@/assets/coverSection/${props.sectId}.jpg`));
+    const err_img = (e) => e.target.src = 
+    "https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg";
 
     watchEffect(() => {
       load(props.sectId);
       document.title = 'Piso11 - Section' + props.sectId;
     });
 
-    return {articles, error, sectionImage}
+    return {articles, error, sectionImage, err_img}
   }
 }
 </script>

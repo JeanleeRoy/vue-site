@@ -3,7 +3,7 @@
     <article v-for="article of articles" :key="article.id">
       <section class="image">
         <div><img src="https://example.com/example.jpg" alt="article-img"
-          onerror="this.src='https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg';"></div>
+          @error="err_img"></div>
       </section>
       <section class="text">
         <div>
@@ -30,14 +30,21 @@ export default {
     const short = (text) => {
       return text.slice(0, textSize) + (text.length > textSize ? "..." : "");
     }
-    const image = () => require(`@/assets/img_bg.jpg`)
+    const image = () => require(`@/assets/img_bg.jpg`);
+    const err_img = (e) => e.target.src = 
+    "https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg";
 
-    return { short, image };
+    return { short, image, err_img };
   }
 }
 </script>
 
 <style scoped>
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 article {
   display: flex;
   width: 90%;
@@ -98,11 +105,6 @@ article .text h3 {
 }
 
 @media only screen and (min-width: 768px) {
-  main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
   article {
     width: 30%;
     margin: 20px;

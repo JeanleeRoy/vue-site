@@ -5,7 +5,7 @@
   <img 
     src="@/assets/articles/temporal.webp"
     class="article-hero-image" :alt="'img_article_'+article.id"
-    onerror="this.src='https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg';"
+    @error="err_img"
   >
   <section class="article-info">
     <p><b>Escrito por: </b> Autor-{{ article.userId }} </p>
@@ -24,12 +24,13 @@ export default {
   props: ['article'],
   setup(props) {
     const fecha = new Date(Date.now()).toLocaleDateString();
-
+    const err_img = (e) => e.target.src = 
+    "https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg";
     watchEffect(() => {
       document.title = 'Piso11 - ' + props.article.title;
     });
 
-    return { fecha }
+    return { fecha, err_img }
   }
 }
 </script>
