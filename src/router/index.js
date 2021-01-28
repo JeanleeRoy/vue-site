@@ -10,7 +10,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/section/:sectId",
+    path: "/section/:slug",
     name: "Seccion",
     component: Seccion,
     props: true

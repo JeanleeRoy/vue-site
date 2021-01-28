@@ -8,35 +8,17 @@
         <img @click="toggle" class="hamburger-img" src="@/assets/menu.png" alt="menu">
       </a>
       <ul id="sections" class="sections" :class="{open: mostrar}">
-        <img v-if="mostrar" @click="toggle" class="hamburger-img" src="@/assets/close.png" alt="menu">
+        <img v-if="mostrar" @click="toggle" 
+          class="hamburger-img" src="@/assets/close.png" alt="menu"
+        >
         <li @click="not_show"><router-link 
           to="/" class="enlace">
           Home
         </router-link></li>
-        <li @click="not_show"><router-link
-          :to="{ name: 'Seccion', params: {sectId: 1} }"
+        <li v-for="(tag, index) in secciones" :key="index" @click="not_show"><router-link
+          :to="{ name: tag.compName, params: {slug: tag.slug} }"
           class="enlace">
-          Section 1
-        </router-link></li>
-        <li @click="not_show"><router-link
-          :to="{ name: 'Seccion', params: {sectId: 2} }"
-          class="enlace">
-          Section 2
-        </router-link></li>
-        <li @click="not_show"><router-link
-          :to="{ name: 'Seccion', params: {sectId: 3} }"
-          class="enlace">
-          Section 3
-        </router-link></li>
-        <li @click="not_show"><router-link
-          :to="{ name: 'Seccion', params: {sectId: 4} }"
-          class="enlace">
-          Section 4
-        </router-link></li>
-        <li @click="not_show"><router-link
-          :to="{ name: 'Seccion', params: {sectId: 5} }"
-          class="enlace">
-          Section 5
+          {{tag.name}}
         </router-link></li>
       </ul>
     </div>
@@ -44,17 +26,19 @@
 </template>
 
 <script>
+import sectNames from '@/assets/sections.json';
 import { ref } from 'vue';
 export default {
   name : 'Menu',
   setup() {
+    const secciones = ref(sectNames.sections);
     const mostrar = ref(false);
 
     const toggle = () => { mostrar.value = !(mostrar.value) };
     const not_show = () => { mostrar.value = false };
     window.addEventListener("resize", not_show);
 
-    return {mostrar, toggle, not_show}
+    return {mostrar, toggle, not_show, secciones}
   }
 }
 </script>
@@ -129,7 +113,6 @@ ul.sections li {
 }
  .sections .router-link-exact-active {
    background-color: rgba(255, 255, 255, 0.25);
-   border-bottom: 1px solid rgba(238, 238, 238, 0.4);
  }
 
 @media only screen and (min-width: 768px) {

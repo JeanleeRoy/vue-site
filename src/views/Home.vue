@@ -8,7 +8,7 @@ export default {
   name : 'Home',
   setup() {
     onMounted(() => {
-      console.log('component is mounted!')
+      document.title = `Revista Piso 11`;
     })
   }
 }

@@ -4,15 +4,15 @@
       @error="err_img"
     >
     <div class="section">
-      <h1>Section name {{sectId}}</h1>
+      <h1 v-if="seccion" >{{seccion.name}} </h1>
     </div>
   </section>
   <section class="recent">
     <p class="container" >Publicaiones recientes</p>
   </section>
   <br>
-  <div v-if="articles.length">
-    <article-list :articles="articles"/>
+  <div v-if="posts.length">
+    <article-list :articles="posts"/>
   </div>
   <div v-else>
     <main><loading/></main>
@@ -22,8 +22,8 @@
 </template>
 
 <script>
-
-import { getArticles } from '@/services/articleService';
+import sectNames from '@/assets/sections.json';
+import { getPosts } from '@/services/ghostService';
 import Loading from '@/components/Loading.vue'
 import { computed, watchEffect } from 'vue';
 import ArticleList from '@/components/article/ArticleList.vue';
@@ -31,20 +31,22 @@ import ArticleList from '@/components/article/ArticleList.vue';
 export default {
   name : 'Seccion',
   components: { ArticleList, Loading },
-  props: ['sectId'],
+  props: ['slug'],
   
   setup( props ) {
-    const {articles, error, load} = getArticles();
-    const sectionImage = computed(() => require(`@/assets/coverSection/${props.sectId}.jpg`));
+    const seccion = computed(() => sectNames.sections[sectNames[props.slug]])
+    const {posts, error, getData}= getPosts();
+
+    const sectionImage = computed(() => require(`@/assets/coverSection/${props.slug[2].charCodeAt(0)%4+1}.jpg`));
     const err_img = (e) => e.target.src = 
     "https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg";
 
     watchEffect(() => {
-      load(props.sectId);
-      document.title = 'Piso11 - Section' + props.sectId;
+      getData(props.slug);
+      document.title = `Piso11 - ${seccion.value.name}`;
     });
 
-    return {articles, error, sectionImage, err_img}
+    return { posts, error, sectionImage, err_img, seccion}
   }
 }
 </script>

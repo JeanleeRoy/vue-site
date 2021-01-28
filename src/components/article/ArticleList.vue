@@ -2,13 +2,13 @@
   <main class="container">
     <article v-for="article of articles" :key="article.id">
       <section class="image">
-        <div><img src="https://example.com/example.jpg" alt="article-img"
+        <div><img :src="article.feature_image" alt="article-img"
           @error="err_img"></div>
       </section>
       <section class="text">
         <div>
           <h3>{{ article.title }}</h3>
-        <p>{{ short(article.body) }}</p>
+        <p v-if="article.custom_excerpt">{{ short(article.custom_excerpt) }}</p>
         </div>
         <div class="article-link">
           <router-link :to="{ name: 'articulo', params: {articleId: article.id} }">
@@ -26,9 +26,9 @@ export default {
   props: ['articles'],
 
   setup() {
-    const textSize = 180;
+    const txSize = 180;
     const short = (text) => {
-      return text.slice(0, textSize) + (text.length > textSize ? "..." : "");
+      return text.slice(0, txSize) + (text.length > txSize ? "..." : "");
     }
     const image = () => require(`@/assets/img_bg.jpg`);
     const err_img = (e) => e.target.src = 

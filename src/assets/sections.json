@@ -1,0 +1,32 @@
+{
+  "getting-started": 0,
+  "fiction": 1,
+  "fables": 2,
+  "speeches": 3,
+  "sections": [
+    {
+			"secId": 1,
+			"name": "Getting Started",
+			"compName": "Seccion",
+			"slug": "getting-started"
+		},
+		{
+			"secId": 2,
+			"name": "Fiction",
+			"compName": "Seccion",
+			"slug": "fiction"
+		},
+		{
+			"secId": 3,
+			"name": "Fables",
+			"compName": "Seccion",
+			"slug": "fables"
+		},
+		{
+			"secId": 4,
+			"name": "Speeches",
+			"compName": "Seccion",
+			"slug": "speeches"
+		}
+	]
+}
