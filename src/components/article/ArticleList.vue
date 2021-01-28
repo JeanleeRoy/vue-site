@@ -11,7 +11,7 @@
         <p v-if="article.custom_excerpt">{{ short(article.custom_excerpt) }}</p>
         </div>
         <div class="article-link">
-          <router-link :to="{ name: 'articulo', params: {articleId: article.id} }">
+          <router-link :to="{ name: 'articulo', params: {slug: article.slug} }">
             Ver Articulo
           </router-link>
         </div>

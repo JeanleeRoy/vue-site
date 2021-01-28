@@ -5,20 +5,34 @@ const getPosts = () => {
   const posts = ref([]);
   const error = ref(null);
   const getData = async (slug) => {
-    await api()
-      .get("/posts/", {
-        params: {
-          filter: `tag:${slug}`,
-          fields: "id,title,slug,feature_image,custom_excerpt",
-        }
-      })
-      .then((res) => (posts.value = res.data.posts))
-      .catch((err) => (error.value = err.message));
+    await api().get("/posts/", {
+      params: {
+        filter: `tag:${slug}`,
+        fields: "id,title,slug,feature_image,custom_excerpt",
+      }
+    })
+      .then(res => posts.value = res.data.posts)
+      .catch(err => error.value = err.message);
   };
   return { posts, error, getData };
 };
 
-//----- deprecated ------
+const getPost = () => {
+  const post = ref(null);
+  const error = ref(null);
+  const getData = async (slug) => {
+    await api().get(`/posts/slug/${slug}/`, {
+      params: {
+        include: `authors,tags`
+      }
+    })
+      .then(res => post.value = res.data.posts[0])
+      .catch(err => error.value = err.message);
+  }
+  return { post, error, getData };
+}
+
+/*----- temporal ------
 
 const getTags = () => {
   const tags = ref([]);
@@ -43,6 +57,6 @@ const getTagName = () => {
   return { tag_name, getTag };
 };
 
-//----- 
+----- */
 
-export { getTags, getTagName, getPosts };
+export { getPosts, getPost };

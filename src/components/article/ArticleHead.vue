@@ -1,18 +1,18 @@
 <template>
   <div class="article-title">
-    <h1>{{ article.title }}</h1>
+    <h1>{{ titulo }}</h1>
   </div>
   <img 
-    src="@/assets/articles/temporal.webp"
-    class="article-hero-image" :alt="'img_article_'+article.id"
+    :src="imagen"
+    class="article-hero-image" :alt="'img__'+ categoria.name"
     @error="err_img"
   >
   <section class="article-info">
-    <p><b>Escrito por: </b> Autor-{{ article.userId }} </p>
+    <p><b>Escrito por: </b> {{ autor.name }} </p>
     <span>&nbsp; &middot; &nbsp;</span>
     <p><b> Fecha: </b> {{ fecha }}</p>
     <span>&nbsp; &middot; &nbsp;</span>
-    <p><b> Categoría: </b> Section #</p>
+    <p><b> Categoría: </b> {{ categoria.name }} </p>
   </section>
 </template>
 
@@ -21,13 +21,13 @@ import { watchEffect } from 'vue';
 
 export default {
   name: "ArticleHead",
-  props: ['article'],
+  props: ['titulo', 'autor', 'categoria', 'fecha_pb', 'imagen'],
   setup(props) {
-    const fecha = new Date(Date.now()).toLocaleDateString();
+    const fecha = new Date(props.fecha_pb).toLocaleDateString();
     const err_img = (e) => e.target.src = 
     "https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg";
     watchEffect(() => {
-      document.title = 'Piso11 - ' + props.article.title;
+      document.title = 'Piso11 - ' + props.titulo;
     });
 
     return { fecha, err_img }
@@ -69,7 +69,8 @@ export default {
     max-width: 700px;
   }
   .article-info {
-    max-width: 1100px;
+    max-width: 1000px;
+    padding: 0 50px;
     justify-content: right;
   }
 }

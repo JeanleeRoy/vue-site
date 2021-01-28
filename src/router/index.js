@@ -16,7 +16,7 @@ const routes = [
     props: true
   },
   {
-    path: "/article/:articleId",
+    path: "/article/:slug",
     name: "articulo",
     component: Articulo,
     props: true

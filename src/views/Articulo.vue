@@ -2,9 +2,11 @@
   <section v-if="error" class="article-error">
     <h2>- 404 -</h2>Oops! Artículo no encontrado
   </section>
-  <section v-if="article">
-    <article-head :article="article" />
-    <article-body :article="article" />
+  <section v-if=" post">
+    <article-head :imagen="post.feature_image" :autor="post.primary_author" 
+      :categoria="post.primary_tag" :fecha_pb="post.published_at" :titulo="post.title"
+    />
+    <article-body :contenido="post.html" :extracto="post.custom_excerpt" />
   </section>
   <section v-else-if="!error">
     <br>
@@ -13,23 +15,25 @@
 </template>
 
 <script>
-import { getArticle } from '@/services/articleService';
+import { getPost } from '@/services/ghostService';
 import { watchEffect } from 'vue';
+import ArticleHead from '../components/article/ArticleHead.vue';
 import ArticleBody from '../components/article/ArticleBody.vue';
 import Loading from '../components/Loading.vue';
-import ArticleHead from '../components/article/ArticleHead.vue';
 
 export default {
   components: { Loading, ArticleBody, ArticleHead },
   name : 'Articulo',
-  props: ['articleId'],
+  props: ['slug'],
 
   setup(props) {
-    const {article, error, load} = getArticle();
+    const {post, error, getData} = getPost();
     
-    watchEffect(() => load(props.articleId));
+    watchEffect(() => {
+      getData(props.slug);
+    });
 
-    return {article, error}
+    return {error, post}
   }
 }
 </script>
