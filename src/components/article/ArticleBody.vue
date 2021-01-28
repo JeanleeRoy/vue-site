@@ -135,6 +135,46 @@ export default {
 .article-body ol li {
   margin-bottom: 0.6em;
 }
+.kg-gallery-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1040px;
+    width: 100vw;
+}
+.kg-gallery-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.kg-bookmark-container {
+  width: 100%;
+  display: flex;
+  padding: 15px;
+  flex-direction: column-reverse;
+  text-decoration: none;
+  font-size: .8em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.kg-bookmark-container > * {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.kg-bookmark-content {
+  padding-top: 10px;
+  min-width: 140px;
+}
+.kg-bookmark-thumbnail img{
+  max-width: 340px;
+  width: 100%;
+}
+.kg-bookmark-container .kg-bookmark-icon {
+  min-width: 22px;
+  height: 22px;
+  transform: translateY(0.4em);
+  margin-right: 5px;
+}
 
 @media only screen and (min-width: 600px) {
   .article-container {
@@ -155,6 +195,12 @@ export default {
   .article-body ul,
   .article-body ol {
     margin-bottom: 1.27em;
+  }
+  .kg-bookmark-container {
+    flex-direction: row;
+  }
+  .kg-bookmark-content {
+    padding-right: 15px;
   }
 }
 </style>
