@@ -7,7 +7,9 @@
       </section>
       <section class="text">
         <div>
-          <h3>{{ article.title }}</h3>
+          <h3><router-link :to="{ name: 'articulo', params: {slug: article.slug} }">
+            {{ article.title }}
+          </router-link></h3>
         <p v-if="article.custom_excerpt">{{ short(article.custom_excerpt) }}</p>
         </div>
         <div class="article-link">
@@ -82,6 +84,10 @@ article .text h3 {
   font-size: 18px;
   margin-bottom: 10px;
 }
+article h3 a {
+  color: inherit;
+  text-decoration: none;
+}
 .article-link {
   display: flex;
   justify-content: right;
@@ -115,6 +121,12 @@ article .text h3 {
     flex-direction: column;
     padding: 20px;
     justify-content: space-between;
+  }
+  article h3 a {
+    transition: opacity ease .3s;
+  }
+  article h3 a:hover {
+    opacity: .7;
   }
 }
 </style>

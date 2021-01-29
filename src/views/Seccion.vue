@@ -18,11 +18,12 @@
     <main><loading/></main>
   </div>
   <br><br>
-
+  <Footer v-if="posts.length"/>
 </template>
 
 <script>
 import sectNames from '@/assets/sections.json';
+import Footer from '@/components/Footer.vue'
 import { getPosts } from '@/services/ghostService';
 import Loading from '@/components/Loading.vue'
 import { computed, watchEffect } from 'vue';
@@ -30,7 +31,7 @@ import ArticleList from '@/components/article/ArticleList.vue';
 
 export default {
   name : 'Seccion',
-  components: { ArticleList, Loading },
+  components: { ArticleList, Loading, Footer },
   props: ['slug'],
   
   setup( props ) {

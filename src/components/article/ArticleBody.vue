@@ -11,7 +11,7 @@
 <script>
 export default {
   name: 'ArticleBody',
-  props: ['article', 'contenido', 'extracto'],
+  props: ['contenido', 'extracto'],
   setup() {
 
   }
@@ -41,7 +41,7 @@ export default {
 .article-body a:hover {
   color: #000;
 }
-.article-body > p, .article-body .imagen {
+.article-body > p, .article-body figure {
   margin-bottom: 0.8em;
 }
 .article-body blockquote {
@@ -104,9 +104,15 @@ export default {
 }
 .article-body h3 {
   font-size: 1.4em;
+  margin-bottom: 1rem;
 }
 .article-body h4 {
   font-size: 1.2em;
+  margin-bottom: .9rem;
+}
+.article-body hr {
+  margin: 2em 0;
+  opacity: .3;
 }
 .article-body .imagen,
 .article-body figure {
@@ -185,7 +191,7 @@ export default {
   }
   .article-body > p, 
   .article-body blockquote {
-    margin-bottom: 1.2em;
+    margin-bottom: 1.1em;
     line-height: 1.48em;
   }
   .description {

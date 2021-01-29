@@ -2,7 +2,7 @@
   <section v-if="error" class="article-error">
     <h2>- 404 -</h2>Oops! Artículo no encontrado
   </section>
-  <section v-if=" post">
+  <section v-if="post">
     <article-head :imagen="post.feature_image" :autor="post.primary_author" 
       :categoria="post.primary_tag" :fecha_pb="post.published_at" :titulo="post.title"
     />
@@ -12,9 +12,11 @@
     <br>
     <loading/>
   </section>
+  <Footer v-if="post"/>
 </template>
 
 <script>
+import Footer from '@/components/Footer.vue'
 import { getPost } from '@/services/ghostService';
 import { watchEffect } from 'vue';
 import ArticleHead from '../components/article/ArticleHead.vue';
@@ -22,7 +24,7 @@ import ArticleBody from '../components/article/ArticleBody.vue';
 import Loading from '../components/Loading.vue';
 
 export default {
-  components: { Loading, ArticleBody, ArticleHead },
+  components: { Loading, ArticleBody, ArticleHead, Footer },
   name : 'Articulo',
   props: ['slug'],
 
