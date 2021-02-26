@@ -1,24 +1,22 @@
 <template>
   <section class="hero">
-    <img :src="sectionImage" alt="Cargando..."
-      @error="err_img"
-    >
+    <img :src="sectionImage" alt="Cargando..." @error="err_img" />
     <div class="section">
-      <h1 v-if="seccion" >{{seccion.name}} </h1>
+      <h1 v-if="seccion">{{ seccion.name }}</h1>
     </div>
   </section>
   <section class="recent">
-    <p class="container" >Publicaiones recientes</p>
+    <p class="container">Publicaiones recientes</p>
   </section>
-  <br>
+  <br />
   <div v-if="posts.length">
-    <article-list :articles="posts"/>
+    <article-list :articles="posts" />
   </div>
   <div v-else>
-    <main><loading/></main>
+    <main><loading /></main>
   </div>
-  <br><br>
-  <Footer v-if="posts.length"/>
+  <br /><br />
+  <Footer v-if="posts.length" />
 </template>
 
 <script>
@@ -30,24 +28,24 @@ import { computed, watchEffect } from 'vue';
 import ArticleList from '@/components/article/ArticleList.vue';
 
 export default {
-  name : 'Seccion',
+  name: 'Seccion',
   components: { ArticleList, Loading, Footer },
   props: ['slug'],
-  
-  setup( props ) {
-    const seccion = computed(() => sectNames.sections[sectNames[props.slug]])
-    const {posts, error, getData}= getPosts();
 
-    const sectionImage = computed(() => require(`@/assets/coverSection/${props.slug[2].charCodeAt(0)%4+1}.jpg`));
-    const err_img = (e) => e.target.src = 
-    "https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg";
+  setup(props) {
+    const seccion = computed(() => sectNames.sections[sectNames[props.slug]])
+    const { posts, error, getData } = getPosts();
+
+    const sectionImage = computed(() => require(`@/assets/CoverSection/${props.slug[2].charCodeAt(0) % 4 + 1}.jpg`));
+    const err_img = (e) => e.target.src =
+      "https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg";
 
     watchEffect(() => {
       getData(props.slug);
       document.title = `Piso11 - ${seccion.value.name}`;
     });
 
-    return { posts, error, sectionImage, err_img, seccion}
+    return { posts, error, sectionImage, err_img, seccion }
   }
 }
 </script>
@@ -62,7 +60,7 @@ export default {
   height: 100%;
   width: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center;
 }
 h1 {
   display: block;
@@ -73,7 +71,7 @@ h1 {
   margin: 10px;
   color: white;
   border: 4px solid white;
-  background-color: rgba(0, 0, 0, .6);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 .recent {
   padding: 10px 20px;
