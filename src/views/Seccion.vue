@@ -1,6 +1,6 @@
 <template>
   <section class="hero">
-    <img :src="sectionImage" alt="Cargando..." @error="err_img" />
+    <img :src="sectionImage" :key="slug[2]" @error="err_img" />
     <div class="section">
       <h1 v-if="seccion">{{ seccion.name }}</h1>
     </div>
@@ -55,12 +55,22 @@ export default {
   width: 100%;
   height: calc(100vh - 50px);
   overflow: hidden;
+  background-color: #dddddd;
 }
 .hero img {
   height: 100%;
   width: 100%;
   object-fit: cover;
   object-position: center;
+  animation: fade 0.2s ease-in-out;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 h1 {
   display: block;
