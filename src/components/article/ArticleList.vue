@@ -2,18 +2,32 @@
   <main class="container">
     <article v-for="article of articles" :key="article.id">
       <section class="image">
-        <div><img :src="article.feature_image" alt="article-img"
-          @error="err_img"></div>
+        <div>
+          <img
+            :src="article.feature_image"
+            alt=""
+            loading="lazy"
+            @error="err_img"
+          />
+        </div>
       </section>
       <section class="text">
         <div>
-          <h3><router-link :to="{ name: 'articulo', params: {slug: article.slug} }">
-            {{ article.title }}
-          </router-link></h3>
-        <p v-if="article.custom_excerpt">{{ short(article.custom_excerpt) }}</p>
+          <h3>
+            <router-link
+              :to="{ name: 'articulo', params: { slug: article.slug } }"
+            >
+              {{ article.title }}
+            </router-link>
+          </h3>
+          <p v-if="article.custom_excerpt">
+            {{ short(article.custom_excerpt) }}
+          </p>
         </div>
         <div class="article-link">
-          <router-link :to="{ name: 'articulo', params: {slug: article.slug} }">
+          <router-link
+            :to="{ name: 'articulo', params: { slug: article.slug } }"
+          >
             Ver Articulo
           </router-link>
         </div>
@@ -33,8 +47,8 @@ export default {
       return text.slice(0, txSize) + (text.length > txSize ? "..." : "");
     }
     const image = () => require(`@/assets/img_bg.jpg`);
-    const err_img = (e) => e.target.src = 
-    "https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg";
+    const err_img = (e) => e.target.src =
+      "https://raw.githubusercontent.com/JeanleeRoy/images/master/project/piso11/default.jpg";
 
     return { short, image, err_img };
   }
@@ -61,8 +75,8 @@ article .image {
   padding-top: 56.25%;
   overflow: hidden;
 }
-article .image > div{
-  position:  absolute;
+article .image > div {
+  position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
@@ -102,10 +116,10 @@ article h3 a {
   box-shadow: 0 5px 10px 0 rgba(66, 80, 148, 0.12);
   color: #fff;
   font-weight: 600;
-  transition: all ease .5s;
+  transition: all ease 0.5s;
 }
 .article-link a:hover {
-  color: #4B5A6A;
+  color: #4b5a6a;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 5px 10px 0 rgba(31, 37, 66, 0.2);
 }
@@ -123,10 +137,10 @@ article h3 a {
     justify-content: space-between;
   }
   article h3 a {
-    transition: opacity ease .3s;
+    transition: opacity ease 0.3s;
   }
   article h3 a:hover {
-    opacity: .7;
+    opacity: 0.7;
   }
 }
 </style>
